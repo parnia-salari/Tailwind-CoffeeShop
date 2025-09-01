@@ -1,0 +1,13 @@
+{
+  "name": "tailwind-coffeeshop",
+  "version": "1.0.0",
+  "description": "Tailwind CSS project for CoffeeShop",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./src/input.css -o ./public/styles/app.css --watch",
+    "build": "npx tailwindcss -i ./src/input.css -o ./public/styles/app.css --minify"
+  },
+  "dependencies": {
+    "tailwindcss": "^4.1.12",
+    "@tailwindcss/cli": "^4.1.12"
+  }
+}

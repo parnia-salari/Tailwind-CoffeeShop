@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Coffee Shop</title>
+    <link rel="icon" href="images/fav-icon.png" type="image/png">
     <link href="styles/app.css" rel="stylesheet">
+    <script>
+        document.documentElement.classList.toggle("dark",localStorage.theme === "dark" ||
+        (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
+        );
+    </script>
 </head>
 <body class="font-DanaRegular bg-gray-100 dark:bg-zinc-800 bg-header-desktop">
     <!-- all app icons -->
@@ -28,21 +34,22 @@
     <header class="fixed top-9 right-0 left-0 bg-black/50 w-[90%] h-24 mx-auto px-10 py-5 rounded-3xl flex items-center backdrop-blur-sm">
        <div class="flex items-center justify-between w-full">
          <!-- logo & menu -->
-        <nav class="flex gap-x-9 items-center">
+        <nav class="flex gap-x-9 items-center h-14">
             <div><img src="images/app-logo.png" alt="Coffee Shop"></div>
 
-            <ul class="flex gap-x-9 text-gray-300 text-xl tracking-tightest">
+            <ul class="flex gap-x-9 text-gray-300 text-xl tracking-tightest h-full child:leading-[56px]">
                 <li class="font-DanaMedium text-orange-200"><a>صفحه اصلی</a></li>
-                <li><a> فروشگاه</a>
+                <li class="relative group"><a class="group-hover:text-orange-200 transition-colors"> فروشگاه</a>
                     <!-- shop submenu -->
-                <ul class="hidden">
-                    <li><a>قهوه ویژه</a></li>
-                    <li><a>ویژه در سطح جهانی </a></li>
-                    <li><a>قهوه درجه یک</a></li>
-                    <li><a>ترکیبات تجاری </a></li>
-                    <li><a>کپسول قهوه </a></li>
-                    <li><a>قهوه برزیلی</a></li>
-                </ul>
+                <div class="absolute top-full opacity-0 invisible group-hover:opacity-100 group-hover:visible p-6 space-y-4 w-52 tracking-normal text-base text-zinc-700 dark:text-white bg-white dark:bg-zinc-700 shadow-custom rounded-2xl border-t-[3px] border-t-orange-300 child:inline-block child:transition-all 
+                transition-all child-hover:text-orange-300">
+                    <a href="#">قهوه ویژه</a>
+                    <a href="#">ویژه در سطح جهانی </a>
+                    <a href="#">قهوه درجه یک</a>
+                    <a href="#">ترکیبات تجاری </a>
+                    <a href="#">کپسول قهوه </a>
+                    <a href="#">قهوه زینو برزیلی</a>
+                </div>
                 </li>
                 <li><a>درباره ما </a></li>
                 <li><a> تماس با ما</a></li>
@@ -53,23 +60,31 @@
          <div class="flex gap-x-10 text-orange-200 text-xl">
            <div class="flex items-center gap-x-9">
             <!-- cart -->
-            <div>
-                <svg class="size-8"><use xlink:href="#shopping-cart"></use></svg>
+            <div class="py-3">
+                <div>
+                    <svg class="size-8"><use href="#shopping-cart"></use></svg>
+                </div>
+                 <!-- cart box -->
+                 <div>
+
+                 </div>
             </div>
             <!-- switch theme btn -->
-            <div>
-                <svg class="size-8"><use xlink:href="#moon"></use></svg>
+            <div class="cursor-pointer" id="toggle-theme">
+                <svg class="size-8 inline-block dark:hidden"><use href="#moon"></use></svg>
+                <svg class="size-8 hidden dark:inline-block"><use href="#sun"></use></svg>
             </div>
          </div>
         <!-- divide -->
          <span class="w-px h-14 inline-block bg-white/20"></span>
          <!-- login btn -->
          <a href="#" class="flex gap-x-2.5 items-center tracking-tightest">
-            <svg class="size-8 rotate-180"><use xlink:href="#login"></use></svg>
+            <svg class="size-8 rotate-180"><use href="#login"></use></svg>
             <span>ورود | ثبت‌نام</span>
          </a>
         </div>
        </div>
     </header>
+    <script src="scripts/app.js"></script>
 </body>
 </html>

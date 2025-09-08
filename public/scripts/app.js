@@ -1,45 +1,75 @@
-const toggleThemeBtn = document.querySelectorAll(".toggle-theme");
-const submenuOpen=document.querySelector(".submenu-open-btn");
-const submenu=document.querySelector(".submenu");
-const navOpneBtn=document.querySelector(".nav-icon")
-const navCloseBtn=document.querySelector(".navCloseBtn")
-const navPart=document.querySelector(".navPart")
-const overlay=document.querySelector(".overlay")
 
-toggleThemeBtn.forEach(btn=>{
-btn.addEventListener("click" , () => {
-    if (localStorage.theme === "dark"){
-        document.documentElement.classList.remove("dark");
-        localStorage.theme = "light";
-    } else {
-        document.documentElement.classList.add("dark");
-        localStorage.setItem("theme" , "dark");
+// =======================
+// Elements
+// =======================
+const html = document.documentElement;
+const overlay = document.querySelector(".overlay");
+const navPart = document.querySelector(".navPart");
+const cart = document.querySelector(".cart");
+const submenu = document.querySelector(".submenu");
+const submenuBtn = document.querySelector(".submenu-open-btn");
+
+// =======================
+// Theme toggle
+// =======================
+document.addEventListener("click", (e) => {
+    if (e.target.closest(".toggle-theme")) {
+        const isDark = html.classList.toggle("dark");
+        localStorage.setItem("theme", isDark ? "dark" : "light");
     }
-    })
-})
+});
 
-submenuOpen.addEventListener("click",(e)=>{
-    console.log(e.currentTarget.parentElement)
-    e.currentTarget.parentElement.classList.toggle("text-orange-300")
+// =======================
+// Submenu toggle
+// =======================
+submenuBtn.addEventListener("click", () => {
     submenu.classList.toggle("submenu--open");
-})
+    submenuBtn.parentElement.classList.toggle("text-orange-300");
+});
 
-navOpneBtn.addEventListener("click" , ()=>{
-    navPart.classList.remove("-right-0")
-    navPart.classList.add("right-0")
-    overlay.classList.add("overlay--visible")
-})
+// =======================
+// Open/close panels
+// =======================
+function openPanel(panel, showClass, hideClass) {
+    panel.classList.remove(hideClass);
+    panel.classList.add(showClass);
+    overlay.classList.add("overlay--visible");
+}
 
-navCloseBtn.addEventListener("click",()=>{
-    navPart.classList.add("-right-0")
-    navPart.classList.remove("right-0")
-    overlay.classList.remove("overlay--visible")
+function closePanel(panel, showClass, hideClass) {
+    panel.classList.add(hideClass);
+    panel.classList.remove(showClass);
+    overlay.classList.remove("overlay--visible");
+}
 
-})
+// =======================
+// Nav open/close
+// =======================
+document.addEventListener("click", (e) => {
+    if (e.target.closest(".nav-icon")) {
+        openPanel(navPart, "right-0", "-right-64");
+    }
+    if (e.target.closest(".navCloseBtn")) {
+        closePanel(navPart, "right-0", "-right-64");
+    }
+});
 
-overlay.addEventListener("click",()=>{
-    navPart.classList.add("-right-0")
-    navPart.classList.remove("right-0")
-    overlay.classList.remove("overlay--visible")
+// =======================
+// Cart open/close
+// =======================
+document.addEventListener("click", (e) => {
+    if (e.target.closest(".cart-icon")) {
+        openPanel(cart, "left-0", "-left-64");
+    }
+    if (e.target.closest(".cartCloseBtn")) {
+        closePanel(cart, "left-0", "-left-64");
+    }
+});
 
-})
+// =======================
+// Overlay click closes both panels
+// =======================
+overlay.addEventListener("click", () => {
+    closePanel(navPart, "right-0", "-right-64");
+    closePanel(cart, "left-0", "-left-64");
+});

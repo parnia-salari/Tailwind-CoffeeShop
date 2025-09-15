@@ -177,7 +177,39 @@
 
     .swiper-button-prev-custom,
     .swiper-button-next-custom{
-        @apply size-9 md:size-10 rounded-full shadow-custom bg-white text-zinc-700 dark:bg-zinc-700 dark:text-white transition-all hover:bg-gray-300 dark:hover:bg-white dark:hover:text-zinc-700;
+        @apply size-9 md:size-10 rounded-full shadow-custom bg-white text-zinc-700 dark:bg-zinc-700 dark:text-white transition-all hover:bg-gray-300 dark:hover:bg-white dark:hover:text-zinc-700 cursor-pointer;
+    }
+    .services{
+        @apply relative;
+    }
+    .services::after ,
+    .services::before
+    {
+        content: "";
+        display:block;
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        background-color: #d1d5db;
+    }
+    @media screen and (min-width:630px){
+        .services::after ,
+        .services::before{
+            content: none;
+        }
+    }
+    html.dark .services::after ,
+    html.dark .services::before{
+        background-color: rgba(2555, 255, 255, 0.1)
+    }
+
+    .services::after{
+        width: 1px;
+        height: calc(100% + 1.25rem);
+    }
+    .services::before{
+        width: calc(100% - 2rem);
+        height: 1px;
     }
 }
 
